@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Klasse ist für Methoden für die einzelnen Nachrichten
 public class Config {
 
     private static FileConfiguration config;
