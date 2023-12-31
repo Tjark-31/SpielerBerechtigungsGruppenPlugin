@@ -1,7 +1,6 @@
 package com.example;
 
- 
-public class Group { // um Gruppenobjekte erstellen zu können, diese Datenbanken hinzufügenzukönnen und allgemein um damit arbeiten können
+public class Group {  // um Gruppenobjekte erstellen zu können, diese Datenbanken hinzufügenzukönnen und allgemein um damit arbeiten können
     private String groupname;
     private String prefix;
  

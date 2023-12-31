@@ -82,7 +82,7 @@ public class GruppenDAO { // baut auf die Commands auf, Schnittstelle Commands u
             return false; // Gruppe wurde nicht gefunden
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Keine Verbindung zur Datenbank");
+            throw new RuntimeException(Config.getNoDatabaseConnectionMessage());
         }
     }
 }

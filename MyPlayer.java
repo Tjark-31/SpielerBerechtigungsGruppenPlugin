@@ -185,7 +185,7 @@ public class MyPlayer {  // zum erstellen und verwalten von Spielern
            n = 3;                              //"Deine Gruppe ist:" + currentgroup permanente Gruppe
         }
         else{
-            throw new RuntimeException("Ein Fehler ist bei der Gruppenzuweisung aufgetreten");
+            throw new RuntimeException(Config.getGruppenZuweisungsfehler());
         }
        
         return n;
@@ -211,8 +211,20 @@ public class MyPlayer {  // zum erstellen und verwalten von Spielern
                 this.setTime(0, 0, 0, 0, 0);
                 saveToDatabase(this);
                 return true;
+            }else{
+                
+                long durationmonths = expirationTime.getMonthValue() - currentTime.getMonthValue();
+                long durationdays = expirationTime.getDayOfMonth() - currentTime.getDayOfMonth();
+                long duratiohoours = expirationTime.getHour() - currentTime.getHour();
+                long durationminutes = expirationTime.getMinute()   - currentTime.getMinute();
+                long durationseconds = expirationTime.getSecond()   - currentTime.getSecond();
+                this.setTime(durationmonths, durationdays, duratiohoours, durationminutes, durationseconds );
+                setAssignmentTime(currentTime);
+                saveToDatabase(this);
+               
+                return false;
             }
-            return false;
+            
         }
         return true; // Wenn keine Zuordnung erfolgt ist, wird als abgelaufen, standard oder permanent  betrachtet
     }

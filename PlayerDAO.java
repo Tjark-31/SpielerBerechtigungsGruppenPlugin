@@ -119,7 +119,7 @@ public class PlayerDAO {
             return false; // Spieler wurde nicht gefunden
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Keine Verbindung zur Datenbank");
+            throw new RuntimeException(Config.getNoDatabaseConnectionMessage());
         }
     }
     
@@ -135,12 +135,12 @@ public class PlayerDAO {
     
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return UUID.fromString(resultSet.getString("playerID"));
+                    return UUID.fromString(resultSet.getString(Config.getPlayerIDDatabaseErrorMessage()));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Fehler beim Abrufen der Spieler-ID aus der Datenbank");
+            throw new RuntimeException();
         }
     
         return null;

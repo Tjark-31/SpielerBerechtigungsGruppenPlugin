@@ -31,8 +31,7 @@ class MyTimeCheckTask extends BukkitRunnable {
 
         // nur ein Fall da der Spieler bei abgelaufener Zeit benachrichtig werden soll, sonst soll er mit /showgroup selbst nachschauen können welcher Gruppe er angehört und wie lange 
         if (w == 1) {
-            ChatManager.displayChatMessage(player, "Deine Gruppenzeit in Gruppe [" + currentPrefix +  "]" + currentGroup  
-                    + "ist abgelaufen. Deine neue Gruppe: [ " + afterPrefix + "]" + afterGroup  );
+            ChatManager.displayChatMessage(player, Config.getExpiredShowGroupTime( currentPrefix, currentGroup, afterPrefix,  afterGroup));
         }
     }
 }

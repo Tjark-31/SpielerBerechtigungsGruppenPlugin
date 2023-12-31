@@ -1,0 +1,40 @@
+general:
+  serverName: "MyServer"
+  
+#Benachrichtigungen an die Spieler in den einzelnen Methoden der anderen Klassen
+messages:
+  welcome: "Willkommen, Spieler [%groupPrefix%] %playerName%!"
+  goodbye: "Auf Wiedersehen, Spieler  [%groupPrefix%] %playerName%!"
+  gruppenZuweisungsfehler: "Ein Fehler ist bei der Gruppenzuweisung aufgetreten!"
+  databaseerror: "PostgreSQL Datenbank Driver nicht gefunden!"
+  nodatabaseconnection: "Keine Verbindung zur Datenbank"
+  playerIDdatabaseerror: "Fehler beim Abrufen der Spieler-ID aus der Datenbank"
+  joingrouperror: "Verwendung: /joingroup <Gruppenname> <Prefix> <DurationMonths> <DurationDays> <DurationHours> <DurationMinutes> <DurationSeconds>"
+  joingroup: "Du bist der Gruppe '[%groupPrefix%] %groupName%' beigetreten!"
+  checkgroupname: "Fehler beim Beitreten zur Gruppe. Überprüfe den Gruppennamen."
+  creategrouperror: "Verwendung: /creategroup <Name> <Prefix>"
+  creategroup: "Gruppe '%groupName%' wurde erstellt!"
+  showgrouperror: "Verwendung: /showgroup"
+  expiredshowgrouptime: "Deine Gruppenzeit in Gruppe [%currentPrefix%]%currentGroup%\n" +
+                       " ist abgelaufen. Deine neue Gruppe: [%afterPrefix%]%afterGroup%"
+  showgrouptime: " Du bist in der Gruppe: [%afterPrefix%]%afterGroup%\n" +
+                 " für %myplayer.getDurationMonths% Monate %myplayer.getDurationDays% Tage\n" +
+                 " %myplayer.getDurationHours% Stunden %myplayer.getDurationMinutes% Minuten\n" +
+                 " %myplayer.getDurationSeconds% Sekunden"
+  permshowgroup: "Du bist in der Gruppe: [%afterPrefix%]%afterGroup%"
+  onlyplayercommand: "Dieser Befehl kann nur von Spielern verwendet werden."
+  adderror: "Verwendung: /add <Spielername> <%Gruppenname%> <%Prefix%> <%DurationMonths%> <%DurationDays%> <%DurationHours%> <%DurationMinutes%> <%DurationSeconds%>"
+  add: " Du hast den Spieler %targetPlayerName% zur Gruppe [%groupPrefix%]%groupName% hinzugefügt!"
+  addonlineerror: "Fehler beim Hinzufügen des Spielers zur Gruppe. Überprüfe den Spielernamen oder ob der Spieler online ist."
+  addplayer: "Du wurdest der Gruppe [%groupPrefix%]%groupName% hinzugefügt!"
+  groupnamealreadyused: "Gruppenname schon vergeben. Wähle bitte einen anderen"
+  standardgroup: "Die Standardgruppe wurde erstellt und in der Datenbank gespeichert."
+
+  
+        
+        
+ 
+
+         
+
+        

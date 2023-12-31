@@ -18,7 +18,7 @@ public class MyEventHandler implements Listener { // Begrüßung des Spielers be
         String groupPrefix = myplayer.getprefix();
 
      
-        player.sendMessage("Willkommen, Spieler [" + groupPrefix + "]" + playerName + "!");
+        player.sendMessage(Config.getWelcome(groupPrefix, playerName));
  
     }
 }

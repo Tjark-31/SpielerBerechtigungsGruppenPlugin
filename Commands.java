@@ -15,7 +15,7 @@ public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Dieser Befehl kann nur von Spielern verwendet werden.");
+            sender.sendMessage(Config.getOnlyPlayerCommandError());
             return false;
         }
         Player player = (Player) sender;
@@ -50,23 +50,19 @@ public class Commands implements CommandExecutor {
         myplayer.saveToDatabase(myplayer);
 
         if (w == 1) {
-            ChatManager.displayChatMessage(player,"Deine Gruppenzeit in Gruppe " + currentGroup + "[" + currentPrefix + "]"
-                    + " ist abgelaufen. Deine neue Gruppe:" + afterGroup + "[" + afterPrefix + "]");  // Gruppenzeit ist abgelaufen
+            ChatManager.displayChatMessage(player, Config.getExpiredShowGroupTime( currentPrefix, currentGroup, afterPrefix, afterGroup) );  // Gruppenzeit ist abgelaufen
         } else if (w == 2) {
-            ChatManager.displayChatMessage(player,"Du bist in der Gruppe:" + afterGroup + "[" + afterPrefix + "]" +
-                    " für " + myplayer.getDurationMonths() + " Monate " + myplayer.getDurationDays() + " Tage " +
-                    myplayer.getDurationHours() + " Stunden " + myplayer.getDurationMinutes() + " Minuten " +
-                    myplayer.getDurationSeconds() + " Sekunden "); // Gruppenzeit noch nicht abgelaufen
+            ChatManager.displayChatMessage(player, Config.getShowGroupTime( afterPrefix, afterGroup, myplayer.getDurationMonths(), myplayer.getDurationDays() , myplayer.getDurationHours(), myplayer.getDurationMinutes() , myplayer.getDurationSeconds()) ); // Gruppenzeit noch nicht abgelaufen
         } else if (w == 3) {
-            ChatManager.displayChatMessage(player, "Du bist in der Gruppe:" + afterGroup + "[" + afterPrefix + "]"); // gehört permanent einer Gruppe an
+            ChatManager.displayChatMessage(player, Config.getPermShowGroup(afterPrefix, afterGroup)); // gehört permanent einer Gruppe an
         } else {
-            ChatManager.displayChatMessage(player,"Gruppenzuweisung ist fehlgeschlagen");
+            ChatManager.displayChatMessage(player, Config.getGruppenZuweisungsfehler() );
         }
     }
 
     private void createGroupCommand(Player player, String[] args) { //Gruppe erstellen
         if (args.length != 2) {
-            player.sendMessage("Verwendung: /creategroup <Name> <Prefix>");
+            player.sendMessage(Config.getCreateGroupError());
             return;
         }
 
@@ -78,17 +74,17 @@ public class Commands implements CommandExecutor {
 
             GruppenDAO.erstelleGruppe(groupName, groupPrefix);
 
-            ChatManager.displayChatMessage(player, "Gruppe '" + groupName + "' wurde erstellt!");
+            ChatManager.displayChatMessage(player, Config.getCreateGroup(groupName));
         }
         else{
-            ChatManager.displayChatMessage(player, "Gruppenname schon vergeben. Wähle bitte einen anderen");
+            ChatManager.displayChatMessage(player, Config.getGroupNameAlreadyUsedError());
         }
         
     }
 
     private void joinGroupCommand(Player player, String[] args) { //Gruppe beitreten 
         if (args.length > 7) {
-            player.sendMessage("Verwendung: /joingroup <Gruppenname> <Prefix> <DurationMonths> <DurationDays> <DurationHours> <DurationMinutes> <DurationSeconds>");
+            player.sendMessage(Config.getJoinGroupError());
             return;
         }
         MyPlayer myplayer = PlayerDAO.getcurrentPlayerFromDatabase(player.getUniqueId()); // Spieler muss online sein für Befehle
@@ -104,16 +100,16 @@ public class Commands implements CommandExecutor {
 
             myplayer.saveToDatabase(myplayer);
             
-            ChatManager.displayChatMessage(player, "Du bist der Gruppe '" + groupName + "[" + groupPrefix + "]" +"' beigetreten!");
+            ChatManager.displayChatMessage(player, Config.getJoinGroup(groupPrefix, groupName));
         } else {
-            player.sendMessage("Fehler beim Beitreten zur Gruppe. Überprüfe den Gruppennamen.");
+            player.sendMessage(Config.getCheckGroupNameError());
         }
     }
 
     
     private void add(Player player, String[] args) { // anderen Spieler einer Gruppe hinzufügen
         if (args.length > 8) {
-            player.sendMessage("Verwendung: /add <Spielername> <Gruppenname> <Prefix> <DurationMonths> <DurationDays> <DurationHours> <DurationMinutes> <DurationSeconds>");
+            player.sendMessage(Config.getAddError());
             return;
         }
 
@@ -135,10 +131,10 @@ public class Commands implements CommandExecutor {
             targetPlayer.saveToDatabase(targetPlayer);
             targetPlayer.updateInDatabase(targetPlayer);
 
-            ChatManager.displayChatMessage(player, "Du hast den Spieler " + targetPlayerName + " zur Gruppe " + "[" + groupPrefix + "]" + groupName  + " hinzugefügt!");
-            ChatManager.displayChatMessage(addPlayer, "Du wurdest der Gruppe [" + groupPrefix + "]" + groupName  + " hinzugefügt!");
+            ChatManager.displayChatMessage(player, Config.getAdd(targetPlayerName, groupPrefix, groupName));
+            ChatManager.displayChatMessage(addPlayer, Config.getAddPlayerMessage( groupPrefix, groupName));
         } else {
-            player.sendMessage("Fehler beim Hinzufügen des Spielers zur Gruppe. Überprüfe den Spielernamen oder ob der Spieler online ist.");
+            player.sendMessage(Config.getAddOnlineError());
         }
     }
 
